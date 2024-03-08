@@ -1,0 +1,9 @@
+<nav class="flex justify-between">
+  <ul class="flex justify-start gap-2">
+    <li><a routerLink="home" routerLinkActive="active" class="hover:font-bold">Home</a></li>
+    <li><a routerLink="info" routerLinkActive="active" class="hover:font-bold">Information</a></li>
+  </ul>
+  <div>
+    {{ cartStore.productsAll().length }}
+  </div>
+</nav>
