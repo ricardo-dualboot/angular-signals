@@ -11,20 +11,19 @@
       </div>
       <div class="m-2 text-xs text-center">
         <div>
-          <p for="id">
+          <!-- <p for="id">
             <strong id="id" name="id">Id: </strong>
             <span>{{ product.id }}</span>
-          </p>
-          <p for="name" class="flex item-start">
-            <strong id="name" name="name">Title: </strong>
-            <span
+          </p> -->
+          <p for="name" class="text-left">
+            <span class="text-lg"
               ><a [routerLink]="[product.id]">{{ product.title }}</a></span
             >
           </p>
-          <p for="price" class="flex items-center gap-2">
-            <strong id="price" name="price">Price: </strong>
-            <span class="text-lg">{{ product.price | currency }}</span>
-          </p>
+          <div for="price" class="flex items-center gap-2 w-6/12 mx-auto">
+            <p id="price" name="price">Price: </p>
+            <p class="text-4xl text-emerald-700">{{ product.price | currency }}</p>
+          </div>
         </div>
       </div>
     </div>
