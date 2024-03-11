@@ -93,3 +93,8 @@ https://www.youtube.com/watch?v=UHFB7-gfdLw
 # CSS Animations generator
 
 https://webcode.tools/css-generator
+
+
+# NGRX Signals
+
+https://ngrx.io/guide/signals

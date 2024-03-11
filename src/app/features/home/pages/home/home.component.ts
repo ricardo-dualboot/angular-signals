@@ -1,6 +1,6 @@
-import { Component, inject, effect, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CartStore } from '@shared/store/shopping-cart.store';
 import { Product } from '@shared/models/product.interface';
 import { CurrencyPipe } from '@angular/common';
@@ -28,12 +28,6 @@ export class HomeComponent {
   cartStore = inject(CartStore);
   private readonly productService = inject(ProductsService).getProducts();
   public title = signal<String>("Listado de productos");
-
-  constructor(private router: Router) {
-    effect(() => {
-      // console.log('called', this.cartStore.productsAll());
-    });
-  }
 
   public addToCart = (product: Product) => {
     this.cartStore.addToCart(product);
