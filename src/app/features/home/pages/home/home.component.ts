@@ -1,33 +1,42 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, effect, signal } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CartStore } from '@shared/store/shopping-cart.store';
 import { Product } from '@shared/models/product.interface';
+import { CurrencyPipe } from '@angular/common';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CurrencyPipe],
   templateUrl: './home.component.html',
-  styles: [
-    `
-      div {
-        display: flex;
-        flex-wrap: wrap;
-        align-content: stretch;
-      }
-
-      .container {
-        flex-basis: 250px;
-        height: 300px;
-        margin-bottom: 1rem;
-      }
-    `,
+  styles: [],
+  animations: [
+    trigger('stagger',[
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('100ms', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('100ms', style({ opacity: 0 }))
+      ])
+    ])
   ],
 })
 export class HomeComponent {
   cartStore = inject(CartStore);
   private readonly productService = inject(ProductsService).getProducts();
-  public products = signal<Product[]>(this.cartStore.productsAll());
+  public title = signal<String>("Listado de productos");
+
+  constructor(private router: Router) {
+    effect(() => {
+      // console.log('called', this.cartStore.productsAll());
+    });
+  }
+
+  public addToCart = (product: Product) => {
+    this.cartStore.addToCart(product);
+  }
 
 }

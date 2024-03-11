@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class HeaderComponent {
-  title = "Aprendiendo signals"
+  public title = signal<String>("Control flow | Signals | NGRX Signals");
 }

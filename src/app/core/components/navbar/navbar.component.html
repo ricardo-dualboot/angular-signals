@@ -1,9 +1,23 @@
-<nav class="flex justify-between">
-  <ul class="flex justify-start gap-2">
+<nav class="flex justify-between mx-4 my-4">
+  <ul class="flex justify-center gap-2">
     <li><a routerLink="home" routerLinkActive="active" class="hover:font-bold">Home</a></li>
+    <li><a routerLink="cart" routerLinkActive="active" class="hover:font-bold">Cart</a></li>
     <li><a routerLink="info" routerLinkActive="active" class="hover:font-bold">Information</a></li>
   </ul>
   <div>
-    {{ cartStore.productsAll().length }}
+    Added products: {{cartStore.productsCount()}} | Total price: {{cartStore.totalAmount() | number : '1.2-2'}} | All shopping products: {{ cartStore.productsAll().length }}
+  </div>
+  <div>
+    @switch (role()) {
+      @case ('EMP'){
+        <p>Empleado</p>
+      }
+      @case ('ADMIN'){
+        <p>Admin</p>
+      }
+      @default {
+        <p>Admin</p>
+      }
+    }
   </div>
 </nav>

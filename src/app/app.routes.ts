@@ -17,6 +17,11 @@ export const routes: Routes = [
     title: 'General information',
   },
   {
+    path: 'cart',
+    loadComponent: () => import('./features/cart/pages/cart/cart.component').then((m) => m.CartComponent),
+    title: 'Shopping caert',
+  },
+  {
     path: '**',
     redirectTo: '/home'
   }

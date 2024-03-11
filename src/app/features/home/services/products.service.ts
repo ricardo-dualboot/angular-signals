@@ -17,7 +17,6 @@ export class ProductsService {
     this.httpClient.get<Product[]>(PRODUCTS_URL)
     .pipe(
       tap((products: any) => {
-        // this.products.set(products)
         this.cartStore.addProducts(products);
       }),
       catchError((err) => {

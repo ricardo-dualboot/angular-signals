@@ -89,3 +89,7 @@ https://www.youtube.com/watch?v=UHFB7-gfdLw
         ▽ icons
             custom-icon-a.svg
             custom-icon-b.svg
+
+# CSS Animations generator
+
+https://webcode.tools/css-generator

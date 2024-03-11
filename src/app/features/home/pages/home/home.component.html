@@ -1,34 +1,51 @@
-<div class="flex justify-center">
-  @defer (on timer(10ms); prefetch when products()) { @for (product of products();
-  track product.id) {
+<h2 class="text-center py-10 text-3xl">{{ title() }}</h2>
+@defer(on viewport){
+@if(cartStore.productsAll().length) {
+<div class="grid grid-cols-4 gap-4">
+  @for (product of cartStore.productsAll(); track product.id; let i = $index; let f = $first; let l = $last;) {
 
   <div class="container bg-gray-100">
     <div
-      class="image-container w-full bg-white p-2 min-h-[180px] flex item-center"
+      class="image-container w-full bg-white p-2 min-h-[180px] flex item-center justify-center"
     >
       <img [src]="product.image" alt="image" class="max-h-[150px]" />
     </div>
-    <div class="m-2 text-xs">
-      <label for="id">
-        <span id="id" name="id">Id: </span>
-        <span>{{ product.id }}</span>
-      </label>
-      <label for="name" class="flex item-start">
-        <span id="name" name="name">Title: </span>
-        <span
-          ><a [routerLink]="[product.id]">{{ product.title }}</a></span
-        >
-      </label>
-      <label for="price" class="flex item-start">
-        <span id="price" name="price">Price: </span>
-        <span class="text-lg">{{ product.price }}</span>
-      </label>
+    <div class="m-2 text-xs text-center">
+      <div>
+        <p for="id">
+          <strong id="id" name="id">Id: </strong>
+          <span>{{ product.id }}</span>
+        </p>
+        <p for="name" class="flex item-start">
+          <strong id="name" name="name">Title: </strong>
+          <span
+            ><a [routerLink]="[product.id]">{{ product.title }}</a></span
+          >
+        </p>
+        <p for="price" class="flex items-center gap-2">
+          <strong id="price" name="price">Price: </strong>
+          <span class="text-lg">{{ product.price | currency }}</span>
+        </p>
+      </div>
+      <button type="button" class="primary-btn" (click)="addToCart(product)">Add to cart</button>
     </div>
   </div>
 
-  } } @loading (minimum 2000ms) {
-  <p>Loading....</p>
-  } @error {
-  <p>Failed to load the products</p>
+  } @empty {
+    <div class="text-xl text-gray-400 gap-4 text-center">
+      No items yet
+    </div>
   }
 </div>
+} @else {
+  <div class="text-xl text-gray-400 gap-4 text-center">
+    No items yet
+  </div>
+}
+}@placeholder {
+  <p class="text-center">Aquí se mostrarán los productos...</p>
+}@loading (minimum 2s) {
+  <p class="text-center">Loading...</p>
+}@error {
+  <p class="text-center">Error...</p>
+}

@@ -1,9 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 
+body, html {
+  @apply bg-emerald-50;
+}
+
 a.active {
-  @apply text-red-400;
+  @apply text-emerald-400;
+}
+
+.primary-btn {
+  @apply bg-emerald-700 text-white rounded-lg p-2 w-10/12;
+}
+
+::view-transition-old(root){
+  animation: exit 1s ease 0s 1 normal forwards;
+}
+
+::view-transition-new(root){
+  animation: enter 1s ease 0s 1 normal forwards;
+}
+
+@keyframes enter {
+	from {
+    opacity: 0;
+		transform: translateY(-50px)
+	}
+
+	to {
+    opacity: 1;
+		transform: translateY(0)
+	}
+}
+
+@keyframes exit {
+	from {
+    opacity: 1;
+		transform: translateY(0)
+	}
+
+	to {
+    opacity: 0;
+		transform: translateY(-50px)
+	}
 }

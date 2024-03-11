@@ -32,27 +32,17 @@ export const CartStore = signalStore(
   })),
   withMethods(({ products, ...store }, toastSvc = inject(ToastrService)) => ({
     addToCart(product: Product) {
-      const isProductInCart = products().find(
-        (item: Product) => item.id === product.id
-      );
-
-      if (isProductInCart) {
-        isProductInCart.qty++;
-        isProductInCart.subTotal = isProductInCart.qty * isProductInCart.price;
-        patchState(store, { products: [...products()] });
-      } else {
-        patchState(store, { products: [...products(), product] });
-      }
-      toastSvc.success('Product added', 'DOMINI STORE');
+      patchState(store, { products: [...products(), product] });
+      toastSvc.success('Product added', 'DUALBOOT STORE');
     },
     removeFromCart(id: number) {
       const updatedProducts = products().filter((product) => product.id !== id);
       patchState(store, { products: updatedProducts });
-      toastSvc.info('Product removed', 'DOMINI STORE');
+      toastSvc.info('Product removed', 'DUALBOOT STORE');
     },
     clearCart() {
       patchState(store, initialState);
-      toastSvc.info('Cart cleared', 'DOMINI STORE');
+      toastSvc.info('Cart cleared', 'DUALBOOT STORE');
     },
     addProducts(products: Product[]) {
       patchState(store, { productsAll: products });
@@ -61,12 +51,9 @@ export const CartStore = signalStore(
 );
 
 function calculateTotalAmount(products: Product[]): number {
-  return products.reduce(
-    (acc, product) => acc + product.price * product.qty,
-    0
-  );
+  return products.reduce((acc, product) => acc + product.price, 0);
 }
 
 function calculateProductCount(products: Product[]): number {
-  return products.reduce((acc, product) => acc + product.qty, 0);
+  return products.length;
 }
