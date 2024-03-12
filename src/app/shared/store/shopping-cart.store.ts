@@ -9,8 +9,15 @@ import {
 import { Product } from '@shared/models/product.interface';
 import { ToastrService } from 'ngx-toastr';
 
+interface Wish {
+  id: number;
+  name: string;
+  isCompleted: boolean;
+}
+
 export interface CartStore {
   products: Product[];
+  wishes: Wish[];
   productsAll: Product[];
   totalAmount: number;
   productsCount: number;
@@ -18,6 +25,7 @@ export interface CartStore {
 
 const initialState: CartStore = {
   products: [],
+  wishes: [],
   productsAll: [],
   totalAmount: 0,
   productsCount: 0,
@@ -30,10 +38,13 @@ export const CartStore = signalStore(
     productsCount: computed(() => calculateProductCount(products())),
     totalAmount: computed(() => calculateTotalAmount(products())),
   })),
-  withMethods(({ products, ...store }, toastSvc = inject(ToastrService)) => ({
+  withMethods(({ products, wishes, ...store }, toastSvc = inject(ToastrService)) => ({
     addToCart(product: Product) {
       patchState(store, { products: [...products(), product] });
       toastSvc.success('Product added', 'DUALBOOT STORE');
+    },
+    updateWishes(lastwishes: Wish[]) {
+      patchState(store, { wishes: lastwishes });
     },
     removeFromCart(id: number) {
       const updatedProducts = products().filter((product) => product.id !== id);

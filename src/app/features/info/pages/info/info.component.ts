@@ -1,6 +1,8 @@
 import { JsonPipe } from '@angular/common';
-import { Component, effect, signal } from '@angular/core';
+import { Component, OnDestroy, computed, effect, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CartStore } from '@shared/store/shopping-cart.store';
+import { ToastrService } from 'ngx-toastr';
 
 interface Wish {
   id: number;
@@ -15,23 +17,33 @@ interface Wish {
   templateUrl: './info.component.html',
   styles: ``
 })
-export class InfoComponent {
+export class InfoComponent implements OnDestroy {
+  cartStore = inject(CartStore);
+  toastSvc = inject(ToastrService)
   public title = signal<String>('Lista de deseos');
   public wish = new FormControl();
   public wishes = signal<Wish[]>([])
 
   constructor() {
+    this.wishes.set(this.cartStore.wishes())
     effect(() => {
       console.log('Effect!', this.wishes());
-    });
+    }, { allowSignalWrites: true });
+  }
+  ngOnDestroy(): void {
+    console.log('Effect!', this.wishes());
+    this.cartStore.updateWishes(this.wishes());
   }
 
   addWish = () => {
-    console.log(this.wish.value)
-    this.wish.value && this.wish.value.length > 3 && this.wishes.update((wishes) => [
-      ...wishes,
-      {name: this.wish.value, isCompleted: false, id: this.wishes.length }
-    ])
+    if(this.wish.value && this.wish.value.length > 3 &&
+    !this.wishes().some((wish)=> wish.name.toLowerCase() === this.wish.value.toLowerCase())) {
+      this.wishes.update((wishes) => [
+        ...wishes,
+        {name: this.wish.value, isCompleted: false, id: this.wishes().length }
+      ]);
+        this.toastSvc.success('Wish added');
+    }
     return false;
   }
   public resetWishes = () => {
