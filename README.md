@@ -28,16 +28,16 @@ Nueva reactividad de angular. Angular Signals es un sistema que rastrea de forma
     Es eliminado cuando el componente es eliminado,
   - computed(): Un computed signal es un deribado de otro signal, por ejemplo, para obtener un signal resultado del cálculo con otro.
 
-  ## 3 - NGRX Signals
+## 3 - NGRX Signals
 
-  Biblioteca que permite el manejo glboal del estado de una aplicación utilizando las signals nativas de angular.
-  NGRX Signals es más claro, declarativo, simple y flexible que NGRX Store.
+Biblioteca que permite el manejo glboal del estado de una aplicación utilizando las signals nativas de angular.
+NGRX Signals es más claro, declarativo, simple y flexible que NGRX Store.
 
-  Principales caractertísticas:
+Principales caractertísticas:
 
-  - Simple e intuitivo.
-  - Liviano y eficiente.
-  - Declarativo.
-  - Modular, extensible y escalable.
-  - Dictaminado, pero flexible.
-  - Seguridad de tipos.
+- Simple e intuitivo.
+- Liviano y eficiente.
+- Declarativo.
+- Modular, extensible y escalable.
+- Dictaminado, pero flexible.
+- Seguridad de tipos.
