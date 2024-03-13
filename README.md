@@ -1,27 +1,43 @@
-# Signals
+# Run project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+npm install
+ng serve -o
 
-## Development server
+## 1 - Nuevo control flow de Angular 17
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Nueva forma de estructuración de los templates
 
-## Code scaffolding
+- Se discrimina el lenguaje de angular del HTML, ya no está basado en directivas.
+- Mejora la perfornmance.
+- Bundles más pequeños.
+- Mejor type safty.
+- Sencillo de visualizar.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 2 - Signals
 
-## Build
+Nueva reactividad de angular. Angular Signals es un sistema que rastrea de forma granular cómo y dónde se usa el estado en una aplicación, lo que permite que el marco optimice las actualizaciones de renderizado.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- La actualización de las variables de estado ya no dependen de zone.js
+- Mayor perfonmance.
+- Se accede a las variables como getters.
+- Puntos de contacto con el useState de React.
+- Los valores de las variables no se asignan de forma directa sino a través de métodos (set, update)
+- Oyente o detector de cambios:
 
-## Running unit tests
+  - effect(): Es ejecutado cuando uno o más valores de un signal han cambiado.
+    Es eliminado cuando el componente es eliminado,
+  - computed(): Un computed signal es un deribado de otro signal, por ejemplo, para obtener un signal resultado del cálculo con otro.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  ## 3 - NGRX Signals
 
-## Running end-to-end tests
+  Biblioteca que permite el manejo glboal del estado de una aplicación utilizando las signals nativas de angular.
+  NGRX Signals es más claro, declarativo, simple y flexible que NGRX Store.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  Principales caractertísticas:
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  - Simple e intuitivo.
+  - Liviano y eficiente.
+  - Declarativo.
+  - Modular, extensible y escalable.
+  - Dictaminado, pero flexible.
+  - Seguridad de tipos.

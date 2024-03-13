@@ -1,16 +1,5 @@
-## Cli
 
-ng g c core/features/details --inline-style
-ng generate service core/features/home/services/products
-
-
-## Tutos
-
-https://www.youtube.com/watch?v=U8YXaWwyd9k
-https://www.youtube.com/watch?v=RkOU2FkuO60
-https://www.youtube.com/watch?v=UHFB7-gfdLw
-
-## Angular folder structure
+## Folder structure reference for angular project
 
 ∇ app
     ∇ core

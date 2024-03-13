@@ -2,34 +2,48 @@
 <div class="container text-center">
   <div class="flex gap-2 items-center justify-center max-w-[500px] mx-auto">
     <div>
-      <input placeholder="Add a wish" type="text" class="text-xl border-2 border-gray-400 p-1 rounded-lg" [formControl]="wish">
+      <input
+        placeholder="Add a wish"
+        type="text"
+        class="text-xl border-2 border-gray-400 p-1 rounded-lg"
+        [formControl]="wish"
+      />
     </div>
-    <button class="primary-btn block max-w-[200px]" (click)="addWish()">Add wish</button>
-    <button class="primary-btn block max-w-[200px]" (click)="resetWishes()">Reset wishes</button>
+    <button class="primary-btn block max-w-[200px]" (click)="addWish()">
+      Add wish
+    </button>
+    <button class="primary-btn block max-w-[200px]" (click)="resetWishes()">
+      Reset wishes
+    </button>
   </div>
 
-  <div class="text-left my-4 px-xl max-w-[500px] mx-auto">
-      <ul>
+    <div class="text-left my-4 px-xl max-w-[500px] mx-auto">
+    <ul>
       @for (wish of wishes(); track wish.id) {
 
-        <li>
-          {{wish.name}}
-          @if(!wish.isCompleted){
-          <button type="button" class="mx-auto mt-2 max-w-[200px] bg-gray-400 px-1 rounded-lg" (click)="markAsComplete(wish)">Completar</button>
-          }
-        </li>
+      <li>
+        {{ wish.name }}
+        @if(!wish.isCompleted){
+        <button
+          type="button"
+          class="mx-auto mt-2 max-w-[200px] bg-gray-400 px-1 rounded-lg"
+          (click)="markAsComplete(wish)"
+        >
+          Completar
+        </button>
+        }
+      </li>
 
       } @empty {
-        <li class="text-center">
-          No wishes
-        </li>
+        <li class="text-center">No wishes</li>
       }
     </ul>
-
   </div>
-  <pre class="text-left">
+  <div class="text-left my-4 px-xl max-w-[500px] mx-auto">
+    <pre class="text-left">
     <code>
       {{wishes() | json}}
     </code>
   </pre>
+  </div>
 </div>

@@ -1,8 +1,8 @@
 <h2 class="text-center py-10 text-3xl">{{ title() }}</h2>
-@defer(on viewport){
-@if(cartStore.productsAll().length) {
+@defer(on viewport){ @if(cartStore.productsAll().length) {
 <div class="grid grid-cols-4 gap-4">
-  @for (product of cartStore.productsAll(); track product.id; let i = $index; let f = $first; let l = $last;) {
+  @for (product of cartStore.productsAll(); track product.id; let i = $index;
+  let f = $first; let l = $last;) {
 
   <div class="container bg-gray-100">
     <div
@@ -22,29 +22,32 @@
           >
         </p>
         <div for="price" class="flex items-center gap-2 w-6/12 mx-auto">
-          <p id="price" name="price">Price: </p>
-          <p class="text-4xl text-emerald-700">{{ product.price | currency }}</p>
+          <p id="price" name="price">Price:</p>
+          <p class="text-4xl text-emerald-700">
+            {{ product.price | currency }}
+          </p>
         </div>
       </div>
-      <button type="button" class="primary-btn mt-4" (click)="addToCart(product)">Add to cart</button>
+      <button
+        type="button"
+        class="primary-btn mt-4"
+        (click)="addToCart(product)"
+      >
+        Add to cart
+      </button>
     </div>
   </div>
 
   } @empty {
-    <div class="text-xl text-gray-400 gap-4 text-center">
-      No items yet
-    </div>
+  <div class="text-xl text-gray-400 gap-4 text-center">No items yet</div>
   }
 </div>
 } @else {
-  <div class="text-xl text-gray-400 gap-4 text-center">
-    No items yet
-  </div>
-}
-}@placeholder {
-  <p class="text-center">Aquí se mostrarán los productos...</p>
+<div class="text-xl text-gray-400 gap-4 text-center">No items yet</div>
+} }@placeholder {
+<p class="text-center">Aquí se mostrarán los productos...</p>
 }@loading (minimum 2s) {
-  <p class="text-center">Loading...</p>
+<p class="text-center">Loading...</p>
 }@error {
-  <p class="text-center">Error...</p>
+<p class="text-center">Error...</p>
 }
